@@ -16,6 +16,7 @@ CREATE TABLE tbl_jenis_denda (id int(11) primary key auto_increment, jenis_denda
 CREATE TABLE tbl_denda (id_pengembalian int(11), id_denda_item int(11), id_jenis_denda int(11), total_denda int(10));
 CREATE TABLE tbl_denda_item (id int(11) primary key auto_increment, id_buku int(11), id_jenis_denda int(11), nominal int(10), keterangan text);
 ALTER TABLE tbl_denda DROP COLUMN id_jenis_denda;
+ALTER TABLE tbl_buku ADD tahun_terbit year after judul;
 
 INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES ('Putu', 'Laki-laki', '08522162662', 'putu_satu', 'putuunderskorsatu');
 INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES ('Mukidi', 'Laki-laki', '0274-773221', 'mukidi', 'lupa');
