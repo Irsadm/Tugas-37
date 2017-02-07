@@ -1,5 +1,5 @@
 CREATE DATABASE perpustakaan_irsad;
-USE perpustakaan_irsad;
+USE perpustakaan_irsa;
 CREATE TABLE tbl_buku (id int(11) primary key auto_increment, id_kategori int(11), id_rak int(11), id_penerbit int(11), id_pengarang int(11), id_petugas int(11), judul varchar(255), tgl_dibuat timestamp, tgl_diperbarui datetime );
 CREATE TABLE tbl_kategori (id int(11) primary key auto_increment, nama varchar(50));
 CREATE TABLE tbl_pengarang (id int(11) primary key auto_increment, nama varchar(50));
@@ -16,7 +16,6 @@ CREATE TABLE tbl_jenis_denda (id int(11) primary key auto_increment, jenis_denda
 CREATE TABLE tbl_denda (id_pengembalian int(11), id_denda_item int(11), id_jenis_denda int(11), total_denda int(10));
 CREATE TABLE tbl_denda_item (id int(11) primary key auto_increment, id_buku int(11), id_jenis_denda int(11), nominal int(10), keterangan text);
 ALTER TABLE tbl_denda DROP COLUMN id_jenis_denda;
-ALTER TABLE tbl_buku ADD tahun_terbit year after judul;
 
 INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES ('Putu', 'Laki-laki', '08522162662', 'putu_satu', 'putuunderskorsatu');
 INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES ('Mukidi', 'Laki-laki', '0274-773221', 'mukidi', 'lupa');
@@ -30,6 +29,12 @@ INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES
  INSERT INTO tbl_kategori (nama) VALUES ('Budaya');
  INSERT INTO tbl_kategori (nama) VALUES ('Psikologi');
 
+ INSERT INTO tbl_pengarang (nama) VALUES ('Barnas Sumantri');
+ INSERT INTO tbl_pengarang (nama) VALUES ('David Lomax');
+ INSERT INTO tbl_pengarang (nama) VALUES ('Deborahann Smith');
+ INSERT INTO tbl_pengarang (nama) VALUES ('Muhammad Wahyu M.N.');
+ INSERT INTO tbl_pengarang (nama) VALUES ('Zainal A.Z.');
+
  INSERT INTO tbl_rak (id_petugas, nama) VALUES (2, 'A1');
  INSERT INTO tbl_rak (id_petugas, nama) VALUES (2, 'A2');
  INSERT INTO tbl_rak (id_petugas, nama) VALUES (2, 'A3');
@@ -37,6 +42,7 @@ INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES
  INSERT INTO tbl_rak (id_petugas, nama) VALUES (1,'B');
 
  ALTER TABLE tbl_penerbit ADD id_petugas int(11) AFTER id;
+ ALTER TABLE tbl_buku ADD tahun_terbit year after judul;
 
  INSERT INTO tbl_penerbit (id_petugas, nama, alamat, kontak) VALUES (2, 'Gramedia Pustaka Utama', 'Gramedia Building, 2nd-3rd floor, Jl. Palmerah Barat No. 33-37 Jakarta Pusat', '(021)53677834');
  INSERT INTO tbl_penerbit (id_petugas, nama, alamat, kontak) VALUES (2, 'Penerbit Abdi Tandur', 'Jl. Kemiri Raya No. 68 RT 03/04 Rawa Lindung Pondok Cabe Udik Ciputat', '(021)7496733');
@@ -94,6 +100,28 @@ UPDATE tbl_denda_item SET id=3 WHERE id=4;
 UPDATE tbl_denda_item SET id=4 WHERE id=5;
 UPDATE tbl_denda_item SET id=5 WHERE id=6;
 UPDATE tbl_denda_item SET id=5 WHERE id=7;
+
+INSERT INTO tbl_pengembalian (id_peminjaman, id_petugas, tgl_pengembalian) VALUES (1, 2, '2017-02-16');
+INSERT INTO tbl_pengembalian (id_peminjaman, id_petugas, tgl_pengembalian) VALUES (2, 2, '2017-02-16');
+INSERT INTO tbl_pengembalian (id_peminjaman, id_petugas, tgl_pengembalian) VALUES (3, 3, '2017-02-17');
+INSERT INTO tbl_pengembalian (id_peminjaman, id_petugas, tgl_pengembalian) VALUES (4, 3, '2017-02-17');
+INSERT INTO tbl_pengembalian (id_peminjaman, id_petugas, tgl_pengembalian) VALUES (5, 3, '2017-02-17');
+
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (1, 2);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (1, 3);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (2, 4);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (3, 3);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (4, 1);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (5, 2);
+INSERT INTO tbl_buku_kembali (id_pengembalian, id_buku) VALUES (5, 4);
+
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (1, 2, 2, 3000, 'Telat 3 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (1, 3, 2, 3000, 'Telat 3 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (2, 4, 2, 3000, 'Telat 3 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (3, 3, 2, 4000, 'Telat 4 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (4, 1, 2, 3000, 'Telat 3 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (5, 2, 2, 2000, 'Telat 2 hari');
+INSERT INTO tbl_denda_item (id, id_buku, id_jenis_denda, nominal, keterangan) VALUES (5, 4, 2, 2000, 'Telat 2 hari');
 
 INSERT INTO tbl_denda (id_pengembalian, id_denda_item, total_denda) VALUES (1, 1, 6000);
 INSERT INTO tbl_denda (id_pengembalian, id_denda_item, total_denda) VALUES (2, 2, 3000);
