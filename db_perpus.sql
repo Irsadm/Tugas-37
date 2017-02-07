@@ -1,5 +1,5 @@
 CREATE DATABASE perpustakaan_irsad;
-USE perpustakaan_irsa;
+USE perpustakaan_irsad;
 CREATE TABLE tbl_buku (id int(11) primary key auto_increment, id_kategori int(11), id_rak int(11), id_penerbit int(11), id_pengarang int(11), id_petugas int(11), judul varchar(255), tgl_dibuat timestamp, tgl_diperbarui datetime );
 CREATE TABLE tbl_kategori (id int(11) primary key auto_increment, nama varchar(50));
 CREATE TABLE tbl_pengarang (id int(11) primary key auto_increment, nama varchar(50));
