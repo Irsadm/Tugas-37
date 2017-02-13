@@ -44,6 +44,8 @@ INSERT INTO tbl_petugas (nama, jenis_kelamin, kontak, username, password) VALUES
  ALTER TABLE tbl_penerbit ADD id_petugas int(11) AFTER id;
  ALTER TABLE tbl_buku ADD tahun_terbit year after judul;
 
+ ALTER TABLE tbl_anggota ADD hapus int(1) DEFAULT 0;
+ 
  INSERT INTO tbl_penerbit (id_petugas, nama, alamat, kontak) VALUES (2, 'Gramedia Pustaka Utama', 'Gramedia Building, 2nd-3rd floor, Jl. Palmerah Barat No. 33-37 Jakarta Pusat', '(021)53677834');
  INSERT INTO tbl_penerbit (id_petugas, nama, alamat, kontak) VALUES (2, 'Penerbit Abdi Tandur', 'Jl. Kemiri Raya No. 68 RT 03/04 Rawa Lindung Pondok Cabe Udik Ciputat', '(021)7496733');
  INSERT INTO tbl_penerbit (id_petugas, nama, alamat, kontak) VALUES (2, 'Media Pressindo Group', 'Caturnunggal, Depok, Sleman Yogyakarta', '(0274)556043');
